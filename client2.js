@@ -4,7 +4,7 @@
 
 // Import required source code
 // Import three.js core
-import * as THREE from "./build/three.module.js";
+import * as THREE from "../build/three.module.js";
 
 // Import add-ons for GLTF models and orbit controls
 import { OrbitControls } from "./src/OrbitControls.js";
@@ -25,7 +25,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setClearColor(0xdfdfdf);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth / 2, window.innerHeight / 2);
-//renderer.setSize(400, 800);
+
 // Add scene to gltf.html
 container.appendChild(renderer.domElement);
 
@@ -37,20 +37,18 @@ var mesh;
 
 // Load GLTF model, add material, and add it to the scene
 const loader = new GLTFLoader().load(
-  "./assets/testing123fogv3.glb", // comment this line out and un comment the line below to swithc models
-  //"./assets/gourd_web.glb", //<-- photogrammetery model
+  "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock.glb?v=1636697903343",
   function(gltf) {
     // Scan loaded model for mesh and apply defined material if mesh is present
     gltf.scene.traverse(function(child) {
-      if (child.isMesh) {
-        //child.material = newMaterial;
-      }
+      //if (child.isMesh) {
+       // child.material = newMaterial;
+      //}
     });
     // set position and scale
     mesh = gltf.scene;
     mesh.position.set(0, 0, 0);
-    mesh.rotation.set(45, 0, 0);
-    mesh.scale.set(.2, .2, .2); // <-- change this to (1, 1, 1) for photogrammetery model
+    mesh.scale.set(0.5, 0.5 ,0.5);
     // Add model to scene
     scene.add(mesh);
   },
@@ -62,13 +60,13 @@ const loader = new GLTFLoader().load(
 
 // Add Orbit Controls
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.minDistance = 3;
+controls.minDistance = 1;
 controls.maxDistance = 6;
 controls.target.set(0, 0, -0.2);
 controls.update();
 
 // Position our camera so we can see the shape
-camera.position.z = 4.5;
+camera.position.z = 4;
 
 // Add a directional light to the scene
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
