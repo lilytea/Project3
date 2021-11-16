@@ -5,12 +5,13 @@
 html,
 body {
   font-family: "Source Code Pro", monospace;
-  margin: auto;
+  
   display: block;
   padding: 20px;
-  background: url(
-data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAMklEQVQYV2N8dvrxfwYk8Oz0EwZGZEGQgJSpDEIQJgDSBFYJE4CrPDPt+H+QFhgASQAAS1MjDyLYWWEAAAAASUVORK5CYII=
-    )repeat;
+  display:flex;
+  background-color:white;
+ 
+ 
 }
 
 /*Canvas style is used for styling the three.js window*/
@@ -22,23 +23,38 @@ canvas {
   max-width: 800px;
   border: 3px solid #6E2E99;
   border-radius: 3px;
+  
 }
 
-#space2 {
-  width: 525px;
-  height: 500px;
-  margin: auto;
+#welcome{
+  
+  
 }
 
+.dummy{
+  height:30px;
+  
+}
 h1 {
   font-style: bold;
   color: #2E9939;
+  font-size:60pt;
   max-width: 75%;
-  text-align: center;
+ 
   margin: auto;
   padding-bottom: 20px;
 }
+.h1{
+  font-style: bold;
+  color: #2E9939;
+  font-size:30pt;
+  max-width: 25%;
+  width:30%;
+  text-align:center;
+  
 
+  
+}
 h2 {
   color: #2E5999;
   max-width: 75%;
@@ -47,20 +63,44 @@ h2 {
   padding-bottom: 20px;
 }
 
+.statement{
+  width:70%;
+
+}
+
+.words{
+width:50%;
+ font-weight: 500;
+  padding: 0px;
+
+  padding-bottom: 20px;
+
+  padding-left: 0%;
+
+
+   color:#38598b; 
+
+ 
+}
 p {
-  width: 50%;
+
   max-width: 75%;
   font-weight: 500;
   padding: 0px;
   padding-left: 25%;
-  padding-bottom: 20px;
+  
   line-height: 150%;
+  padding-left: 0%;
+ 
+
+   color:#38598b; 
 }
 
 p.mid {
   padding-left: 0%;
   text-align: center;
   margin: auto;
+  font-size:35pt;
 }
 
 a {
