@@ -55,7 +55,9 @@ function init() {
   camera.position.z = 200;
   camera.position.x = 0;
 
-controls.getObject().lookAt(new THREE.Vector3(0, 25, 0)); // Look slightly downward
+controls = new PointerLockControls(camera, document.body);
+controls.getObject().lookAt(new THREE.Vector3(0, 25, 0)); // LOOK DOWN
+
 
   // Define basic scene parameters
   scene = new THREE.Scene();
