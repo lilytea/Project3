@@ -3,6 +3,9 @@ import { PointerLockControls } from "./src/PointerLockControls.js";
 import { GLTFLoader } from "./src/GLTFLoader.js";
 
 let camera, scene, renderer, controls;
+let raycaster;
+const clickableObjects = [];
+
 let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false, canJump = false;
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
@@ -49,23 +52,51 @@ function init() {
   document.addEventListener("keydown", onKeyDown);
   document.addEventListener("keyup", onKeyUp);
 
-  // Just load one product to test visuals
+  raycaster = new THREE.Raycaster();
+
+  // Product 1: GLTF model
   const loader = new GLTFLoader();
   loader.load(
     "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fshoe_with_human.glb?v=1636907298860",
     gltf => {
       const model = gltf.scene;
-      model.position.set(0, 0, -100);
+      model.position.set(-50, 0, -100);
       model.scale.set(50, 50, 50);
+      model.userData = { name: "Product Model" };
+      clickableObjects.push(model);
       scene.add(model);
     }
   );
+
+  // Product 2: image panel
+  const texture = new THREE.TextureLoader().load(
+    "https://cdn.glitch.global/62a23053-ce70-4d1c-b386-dbfe331a4076/sample-image.png"
+  );
+  const imagePlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(40, 40),
+    new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
+  );
+  imagePlane.position.set(0, 20, -150);
+  imagePlane.userData = { name: "Product Image" };
+  clickableObjects.push(imagePlane);
+  scene.add(imagePlane);
+
+  // Product 3: box
+  const cube = new THREE.Mesh(
+    new THREE.BoxGeometry(20, 20, 20),
+    new THREE.MeshStandardMaterial({ color: 0x44aa88 })
+  );
+  cube.position.set(60, 10, -100);
+  cube.userData = { name: "Product Box" };
+  clickableObjects.push(cube);
+  scene.add(cube);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
   window.addEventListener("resize", onWindowResize);
+  window.addEventListener("click", onClick);
 }
 
 function onKeyDown(event) {
@@ -94,6 +125,14 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onClick(event) {
+  raycaster.setFromCamera({ x: 0, y: 0 }, camera);
+  const intersects = raycaster.intersectObjects(clickableObjects, true);
+  if (intersects.length > 0) {
+    alert("You clicked on: " + intersects[0].object.userData.name);
+  }
 }
 
 function animate() {
