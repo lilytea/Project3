@@ -239,7 +239,7 @@ function init() {
     wallGeometry_right,
     wall_material_right
   );
-  wall_plane_right.position.set(100, 35, -175);
+  wall_plane_right.position.set(100, 0, 0);
   wall_plane_right.rotation.y = -90;
   scene.add(wall_plane_right);
 
@@ -250,7 +250,7 @@ function init() {
     side: THREE.DoubleSide
   });
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
-  wall_plane_left.position.set(-10, 35, -175);
+  wall_plane_left.position.set(-10, 0, 0);
   wall_plane_left.rotation.y = -90;
   scene.add(wall_plane_left);
 
@@ -443,7 +443,7 @@ function init() {
       mesh6.scale.set(4, 4, 4);
       mesh6.rotation.y = 45;
       // Add model to scene
-      scene.add(mesh6);
+    //  scene.add(mesh6);
     },
     undefined,
     function(error) {
