@@ -212,7 +212,7 @@ floor.position.y = 0;
 
 //  scene.add(wall_plane_back);
 
-  let wallGeometry_right = new THREE.PlaneGeometry(2000, 500);
+  let wallGeometry_right = new THREE.PlaneGeometry(200, 500);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
   const wall_material_right = new THREE.MeshBasicMaterial({
     color: color,
@@ -229,7 +229,7 @@ floor.position.y = 0;
   //
   scene.add(wall_plane_right);
 
-  let wallGeometry_left = new THREE.PlaneGeometry(2000, 500);
+  let wallGeometry_left = new THREE.PlaneGeometry(200, 500);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
   const wall_material_left = new THREE.MeshBasicMaterial({
     color: color,
