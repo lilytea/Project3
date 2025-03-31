@@ -250,7 +250,7 @@ function init() {
     side: THREE.DoubleSide
   });
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
-  wall_plane_left.position.set(, 0, 0);
+  wall_plane_left.position.set( 0, 0);
   wall_plane_left.rotation=Math.PI / 2;
   scene.add(wall_plane_left);
 
