@@ -868,3 +868,4 @@ function addGridHelper() {
   var axis = new THREE.AxesHelper(1000);
   scene.add(axis);
 }
+
