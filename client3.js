@@ -54,29 +54,28 @@ if (prompt) {
   console.log("No prompt found.");
 }
 // deep seek
-async function callDeepSeekAPI(prompt) {
-  try {
-    const response = await fetch("https://api.deepseek.com/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer sk-proj-q2TGRdamh_FJKsH_pxLy_xx6Rcqf1AYRIPFefbEKpDcxHoWZBrN7tdWpkukAL6KSm7yEVUsdETT3BlbkFJMJE-cdaxSQO0Do1YgAQ4tOy5V8ze95yQVFdeYNu-jJEm0CNaH2jZ3izBWD52hQxs_Ii49y2UI"  // ← Replace this with your real API key
-      },
-      body: JSON.stringify({
-        model: "deepseek-chat",  // Or "deepseek-reasoner" depending on your use case
-        messages: [
-          {
-            role: "system",
-            content: "You are an assistant that generates creative visual prompts for 3D scenes."
-          },
-          {
-            role: "user",
-            content: prompt
-          }
-        ],
-        stream: false
-      })
-    });
+async function callDeepSeekViaNetlify(prompt) {
+  const response = await fetch("/.netlify/functions/deepseek", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt })
+  });
+
+  const data = await response.json();
+  console.log("DeepSeek (via Netlify):", data);
+
+  const reply = data.choices?.[0]?.message?.content;
+  return reply;
+}
+const prompt = new URLSearchParams(window.location.search).get("prompt");
+
+if (prompt) {
+  callDeepSeekViaNetlify(prompt).then(reply => {
+    console.log("Response:", reply);
+    // use it in your next step
+  });
+}
+
 
     const data = await response.json();
     console.log("✅ DeepSeek response:", data);
