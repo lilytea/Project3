@@ -236,11 +236,11 @@ floor.position.y = 0;
     side: THREE.DoubleSide
   });
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
-  wall_plane_left.position.set( -100, 0);
+  wall_plane_left.position.set( -100, 100);
  wall_plane_left.rotation.y = Math.PI / 2; // rotate around Y axis
 /*wall_plane_left.rotation.x = Math.PI / 4; // rotate around X axis*/
 
-//  scene.add(wall_plane_left);
+ scene.add(wall_plane_left);
 
   let wallGeometry_top = new THREE.PlaneGeometry(1600, 1500);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
