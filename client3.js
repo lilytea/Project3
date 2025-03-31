@@ -62,27 +62,20 @@ if (prompt) {
 }
 
 // Call Netlify serverless function to securely hit DeepSeek API
-async function callDeepSeekViaNetlify(prompt) {
-  const response = await fetch("/.netlify/functions/deepseek", {
+async function callChatGPT(prompt) {
+  const response = await fetch("/.netlify/functions/chatgpt", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt })
   });
 
   const data = await response.json();
+  console.log("🧠 OpenAI response:", data);
 
-// Pretty print the whole thing
-console.log("🧠 DeepSeek (via Netlify) raw response:", JSON.stringify(data, null, 2));
-
-const reply = data.choices?.[0]?.message?.content;
-
-if (!reply && data.error) {
-  console.error("❌ DeepSeek error:", data.error.message || data.error);
-}
-
-
+  const reply = data.choices?.[0]?.message?.content;
   return reply;
 }
+
 
 
 function init() {
