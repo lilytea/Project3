@@ -252,7 +252,7 @@ floor.position.y = 0;
   // Generate objects (cubes)
   const boxGeometry = new THREE.BoxGeometry(20, 20, 20).toNonIndexed();
 
-  position = boxGeometry.attributes.position;
+ let position = boxGeometry.attributes.position;
   const colorsBox = [];
 
   for (let i = 0, l = position.count; i < l; i++) {
