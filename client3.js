@@ -221,7 +221,7 @@ floor.position.y = 0;
  wall_plane_right.rotation.y = -Math.PI / 2; // rotate around Y axis
 /* wall_plane_right.rotation.x = -Math.PI / 4; // rotate around X axis*/
 
-  
+  //
   scene.add(wall_plane_right);
 
   let wallGeometry_left = new THREE.PlaneGeometry(2000, 500);
