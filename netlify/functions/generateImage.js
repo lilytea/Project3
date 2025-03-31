@@ -5,7 +5,7 @@ export async function handler(event, context) {
         statusCode: 400,
         body: JSON.stringify({ error: "Missing request body." })
       };
-    }//
+    }
 
     const { prompt } = JSON.parse(event.body);
 
@@ -16,6 +16,10 @@ export async function handler(event, context) {
       };
     }
 
+    // ✅ Log BEFORE fetch
+    console.log("Prompt received:", prompt);
+    console.log("API key starts with:", process.env.OPENAI_API_KEY?.slice(0, 5));
+
     const response = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: {
@@ -25,7 +29,7 @@ export async function handler(event, context) {
       body: JSON.stringify({
         prompt,
         n: 1,
-        size: "1024x1024"  // or "512x512", "256x256"
+        size: "1024x1024"
       })
     });
 
@@ -51,7 +55,4 @@ export async function handler(event, context) {
       body: JSON.stringify({ error: "Server error", detail: err.message })
     };
   }
-  console.log("Prompt received:", prompt);
-console.log("API key starts with:", process.env.OPENAI_API_KEY?.slice(0, 5));
-
 }
