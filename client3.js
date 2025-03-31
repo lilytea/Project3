@@ -161,6 +161,7 @@ function animate() {
       controls.getObject().position.y = 10;
       canJump = true;
     }
+    
   }
 
   prevTime = time;
