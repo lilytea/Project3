@@ -26,13 +26,13 @@ function init() {
   light.position.set(0, 200, 0);
   scene.add(light);
 
-  // Floor (not clickable)
+  // Floor (non-clickable)
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(1000, 1000),
     new THREE.MeshStandardMaterial({ color: 0xdddddd })
   );
   floor.rotation.x = -Math.PI / 2;
-  scene.add(floor); // ✅ not in clickableObjects
+  scene.add(floor);
 
   // Controls
   controls = new PointerLockControls(camera, document.body);
@@ -135,8 +135,12 @@ function onClick(event) {
   const intersects = raycaster.intersectObjects(clickableObjects, true);
 
   if (intersects.length > 0) {
-    const clicked = intersects[0].object;
-    if (clicked.userData.name) {
+    let clicked = intersects[0].object;
+    while (clicked && !clicked.userData.name && clicked.parent) {
+      clicked = clicked.parent;
+    }
+
+    if (clicked && clicked.userData.name) {
       alert("You clicked on: " + clicked.userData.name);
     }
   }
