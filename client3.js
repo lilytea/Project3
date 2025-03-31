@@ -297,9 +297,9 @@ floor.position.y = 0;
       });
       // set position and scale
       mesh = gltf.scene;
-      mesh.position.x = 150;
-      mesh.position.y = 100;
-      mesh.position.z = -285;
+      mesh.position.x = 25;
+      mesh.position.y = 25;
+      mesh.position.z = -25;
       mesh.scale.set(80, 80, 80);
       mesh.rotation.y = -45;
       // Add model to scene
@@ -327,7 +327,7 @@ floor.position.y = 0;
       mesh2.scale.set(100, 100, 100);
       mesh2.rotation.y = 250;
       // Add model to scene
-      scene.add(mesh2);
+//      scene.add(mesh2);
     },
     undefined,
     function(error) {
@@ -352,7 +352,7 @@ floor.position.y = 0;
       mesh3.scale.set(60, 60, 60);
       mesh3.rotation.y = 175;
       // Add model to scene
-      scene.add(mesh3);
+  //    scene.add(mesh3);
     },
     undefined,
     function(error) {
@@ -379,7 +379,7 @@ floor.position.y = 0;
       mesh4.scale.set(8, 8, 8);
       mesh4.rotation.y = 45;
       // Add model to scene
-      scene.add(mesh4);
+//      scene.add(mesh4);
     },
     undefined,
     function(error) {
@@ -404,7 +404,7 @@ floor.position.y = 0;
       mesh5.scale.set(4, 4, 4);
       mesh5.rotation.y = 45;
       // Add model to scene
-      scene.add(mesh5);
+ //     scene.add(mesh5);
     },
     undefined,
     function(error) {
