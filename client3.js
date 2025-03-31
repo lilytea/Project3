@@ -51,8 +51,8 @@ function init() {
     1,
     1000
   );
-  camera.position.y = 0;
-  camera.position.z = 200;
+  camera.position.y = 50;
+  camera.position.z = 100;
   camera.position.x = 0;
 
   // Define basic scene parameters
