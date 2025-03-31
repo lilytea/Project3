@@ -70,10 +70,14 @@ async function callDeepSeekViaNetlify(prompt) {
 const prompt = new URLSearchParams(window.location.search).get("prompt");
 
 if (prompt) {
+  console.log("Prompt from URL:", prompt);
   callDeepSeekViaNetlify(prompt).then(reply => {
     console.log("Response:", reply);
     // use it in your next step
   });
+  .catch(error => {
+      console.error("DeepSeek call failed:", error);
+    });
 }
 
 
