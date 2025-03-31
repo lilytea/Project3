@@ -51,4 +51,7 @@ export async function handler(event, context) {
       body: JSON.stringify({ error: "Server error", detail: err.message })
     };
   }
+  console.log("Prompt received:", prompt);
+console.log("API key starts with:", process.env.OPENAI_API_KEY?.slice(0, 5));
+
 }
