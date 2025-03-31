@@ -64,7 +64,7 @@ function init() {
       const model = gltf.scene;
       model.position.set(-50, 0, -100);
       model.scale.set(50, 50, 50);
-      model.userData.name = "3D Shoe Product"; // ✅ add to top-level
+      model.userData = { name: "3D Shoe Product" };
       clickableObjects.push(model);
       scene.add(model);
     }
@@ -79,44 +79,27 @@ function init() {
     new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
   );
   imagePlane.position.set(0, 20, -150);
-  imagePlane.userData.name = "Poster Display";
+  imagePlane.userData = { name: "Poster Display" };
   clickableObjects.push(imagePlane);
   scene.add(imagePlane);
 
-  // --- Product 3: Cube ---
+  // --- Product 3: Color cube ---
   const cube = new THREE.Mesh(
     new THREE.BoxGeometry(20, 20, 20),
     new THREE.MeshStandardMaterial({ color: 0x44aa88 })
   );
   cube.position.set(60, 10, -100);
-  cube.userData.name = "Product Cube";
+  cube.userData = { name: "Product Cube" };
   clickableObjects.push(cube);
   scene.add(cube);
 
+  // Renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
   window.addEventListener("resize", onWindowResize);
   window.addEventListener("click", onClick);
-}
-
-function onClick(event) {
-  raycaster.setFromCamera({ x: 0, y: 0 }, camera);
-  const intersects = raycaster.intersectObjects(clickableObjects, true);
-
-  if (intersects.length > 0) {
-    let clicked = intersects[0].object;
-
-    // 🔁 Traverse up until we find a parent with userData.name
-    while (clicked && !clicked.userData.name && clicked.parent) {
-      clicked = clicked.parent;
-    }
-
-    if (clicked && clicked.userData.name) {
-      alert("You clicked on: " + clicked.userData.name);
-    }
-  }
 }
 
 function onKeyDown(event) {
@@ -145,6 +128,22 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onClick(event) {
+  raycaster.setFromCamera({ x: 0, y: 0 }, camera);
+  const intersects = raycaster.intersectObjects(clickableObjects, true);
+
+  if (intersects.length > 0) {
+    let clicked = intersects[0].object;
+    while (clicked && !clicked.userData.name && clicked.parent) {
+      clicked = clicked.parent;
+    }
+
+    if (clicked && clicked.userData.name) {
+      alert("You clicked on: " + clicked.userData.name);
+    }
+  }
 }
 
 function animate() {
