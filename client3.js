@@ -49,7 +49,7 @@ const prompt = urlParams.get("prompt");
 
 if (prompt) {
   console.log("Prompt from URL:", prompt);
-  generateAndLoad3DModel(prompt); // run your DeepSeek + 3D logic
+//  generateAndLoad3DModel(prompt); // run your DeepSeek + 3D logic
 } else {
   console.log("No prompt found.");
 }
