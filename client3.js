@@ -60,7 +60,7 @@ async function callDeepSeekAPI(prompt) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer sk-3bc58bbd0a3f44968e4f4404d68b9255"  // ← Replace this with your real API key
+        "Authorization": "Bearer sk-proj-q2TGRdamh_FJKsH_pxLy_xx6Rcqf1AYRIPFefbEKpDcxHoWZBrN7tdWpkukAL6KSm7yEVUsdETT3BlbkFJMJE-cdaxSQO0Do1YgAQ4tOy5V8ze95yQVFdeYNu-jJEm0CNaH2jZ3izBWD52hQxs_Ii49y2UI"  // ← Replace this with your real API key
       },
       body: JSON.stringify({
         model: "deepseek-chat",  // Or "deepseek-reasoner" depending on your use case
