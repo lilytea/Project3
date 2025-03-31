@@ -49,7 +49,7 @@ const prompt = new URLSearchParams(window.location.search).get("prompt");
 
 if (prompt) {
   console.log("Prompt from URL:", prompt);
-  callChatGPT(prompt)
+  generateImage(prompt);
     .then(reply => {
       console.log("✅ chatgpt reply:", reply);
       // Do something with the reply (e.g., send to 2D-to-3D next)
