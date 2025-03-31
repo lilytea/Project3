@@ -62,18 +62,31 @@ if (prompt) {
 }
 
 // Call Netlify serverless function to securely hit DeepSeek API
-async function callChatGPT(prompt) {
-  const response = await fetch("/.netlify/functions/chatgpt", {
+async function generateImage(prompt) {
+  const res = await fetch("/.netlify/functions/generateImage", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt })
   });
 
-  const data = await response.json();
-  console.log("🧠 OpenAI response:", data);
+  const data = await res.json();
 
-  const reply = data.choices?.[0]?.message?.content;
-  return reply;
+  if (data.imageUrl) {
+    console.log("Generated image:", data.imageUrl);
+    showImageOnPage(data.imageUrl);
+  } else {
+    console.error("Image generation failed:", data.error);
+  }
+}
+
+function showImageOnPage(url) {
+  const img = document.createElement("img");
+  img.src = url;
+  img.style.position = "absolute";
+  img.style.top = "10px";
+  img.style.right = "10px";
+  img.style.width = "300px";
+  document.body.appendChild(img);
 }
 
 
