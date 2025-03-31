@@ -154,11 +154,11 @@ function init() {
   );
 
   // Generate the ground
-  let floorGeometry = new THREE.PlaneGeometry(1000, 2000,100,100);
-  floorGeometry.rotateX(-Math.PI / 2);
+//  let floorGeometry = new THREE.PlaneGeometry(200, 200);
+//  floorGeometry.rotateX(-Math.PI / 2);
 
   //Vertex displacement pattern for ground
-  let position = floorGeometry.attributes.position;
+//  let position = floorGeometry.attributes.position;
   /*
   for (let i = 0, l = position.count; i < l; i++) {
     vertex.fromBufferAttribute(position, i);
@@ -183,7 +183,7 @@ function init() {
   // Insert completed floor into the scene
   scene.add(floor);
 ***********/
-const floorGeometry = new THREE.PlaneGeometry(2000, 2000);
+const floorGeometry = new THREE.PlaneGeometry(200, 200);
 const floorMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, side: THREE.DoubleSide });
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = -Math.PI / 2;
