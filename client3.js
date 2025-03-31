@@ -49,11 +49,50 @@ const prompt = urlParams.get("prompt");
 
 if (prompt) {
   console.log("Prompt from URL:", prompt);
-//  generateAndLoad3DModel(prompt); // run your DeepSeek + 3D logic
+  callDeepSeekAPI(prompt);
 } else {
   console.log("No prompt found.");
 }
+// deep seek
+async function callDeepSeekAPI(prompt) {
+  try {
+    const response = await fetch("https://api.deepseek.com/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer sk-3bc58bbd0a3f44968e4f4404d68b9255"  // ← Replace this with your real API key
+      },
+      body: JSON.stringify({
+        model: "deepseek-chat",  // Or "deepseek-reasoner" depending on your use case
+        messages: [
+          {
+            role: "system",
+            content: "You are an assistant that generates creative visual prompts for 3D scenes."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ],
+        stream: false
+      })
+    });
 
+    const data = await response.json();
+    console.log("✅ DeepSeek response:", data);
+
+    // Example: access the response content
+    const reply = data.choices?.[0]?.message?.content;
+    if (reply) {
+      console.log("🧠 DeepSeek generated:", reply);
+      // You can now send this to your 2D-to-3D model AI if needed
+    } else {
+      console.error("No content returned from DeepSeek.");
+    }
+  } catch (error) {
+    console.error("❌ DeepSeek API error:", error);
+  }
+}
 
 function init() {
   // Establish the camera
