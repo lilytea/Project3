@@ -70,14 +70,16 @@ async function callDeepSeekViaNetlify(prompt) {
   });
 
   const data = await response.json();
-  console.log("🧠 DeepSeek (via Netlify) raw response:", data);
 
-  const reply = data.choices?.[0]?.message?.content;
+// Pretty print the whole thing
+console.log("🧠 DeepSeek (via Netlify) raw response:", JSON.stringify(data, null, 2));
 
+const reply = data.choices?.[0]?.message?.content;
 
- if (!reply && data.error) {
-  console.error("DeepSeek API returned error:", data.error);
+if (!reply && data.error) {
+  console.error("❌ DeepSeek error:", data.error.message || data.error);
 }
+
 
   return reply;
 }
