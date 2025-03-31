@@ -57,6 +57,8 @@ function init() {
   scene.background = new THREE.Color(0xffffff);
   scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
+
+  
   // Define scene lighting
   //const light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 0.75);
   const light = new THREE.HemisphereLight(0xeeeeff, 0x777788, 0.75);
@@ -247,7 +249,7 @@ floor.position.y = 0;
   wall_plane_top.position.set(0, 500, 0);
   wall_plane_top.rotation.x = Math.PI / 2;
 /*   wall_plane_top.rotation.x = Math.PI / 4;*/
-  scene.add(wall_plane_top);
+//  scene.add(wall_plane_top);
 
   // Generate objects (cubes)
   const boxGeometry = new THREE.BoxGeometry(20, 20, 20).toNonIndexed();
