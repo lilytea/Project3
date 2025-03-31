@@ -12,6 +12,7 @@ import { GLTFLoader } from "./src/GLTFLoader.js";
 let camera, scene, renderer, controls;
 //
 const objects = [];
+//
 let raycaster;
 //
 let moveForward = false;
