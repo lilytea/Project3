@@ -3,9 +3,6 @@ import { PointerLockControls } from "./src/PointerLockControls.js";
 import { GLTFLoader } from "./src/GLTFLoader.js";
 
 let camera, scene, renderer, controls;
-let raycaster;
-const clickableObjects = [];
-
 let moveForward = false, moveBackward = false, moveLeft = false, moveRight = false, canJump = false;
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
@@ -26,7 +23,6 @@ function init() {
   light.position.set(0, 200, 0);
   scene.add(light);
 
-  // Floor (non-clickable)
   const floor = new THREE.Mesh(
     new THREE.PlaneGeometry(1000, 1000),
     new THREE.MeshStandardMaterial({ color: 0xdddddd })
@@ -34,7 +30,6 @@ function init() {
   floor.rotation.x = -Math.PI / 2;
   scene.add(floor);
 
-  // Controls
   controls = new PointerLockControls(camera, document.body);
   scene.add(controls.getObject());
 
@@ -54,69 +49,23 @@ function init() {
   document.addEventListener("keydown", onKeyDown);
   document.addEventListener("keyup", onKeyUp);
 
-  raycaster = new THREE.Raycaster();
-
-  // --- Product 1: GLTF model ---
+  // Just load one product to test visuals
   const loader = new GLTFLoader();
   loader.load(
     "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fshoe_with_human.glb?v=1636907298860",
     gltf => {
       const model = gltf.scene;
-      model.position.set(-50, 0, -100);
+      model.position.set(0, 0, -100);
       model.scale.set(50, 50, 50);
-      model.userData.name = "3D Shoe Product"; // ✅ add to top-level
-      clickableObjects.push(model);
       scene.add(model);
     }
   );
-
-  // --- Product 2: Image panel ---
-  const texture = new THREE.TextureLoader().load(
-    "https://cdn.glitch.global/62a23053-ce70-4d1c-b386-dbfe331a4076/sample-image.png"
-  );
-  const imagePlane = new THREE.Mesh(
-    new THREE.PlaneGeometry(40, 40),
-    new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
-  );
-  imagePlane.position.set(0, 20, -150);
-  imagePlane.userData.name = "Poster Display";
-  clickableObjects.push(imagePlane);
-  scene.add(imagePlane);
-
-  // --- Product 3: Cube ---
-  const cube = new THREE.Mesh(
-    new THREE.BoxGeometry(20, 20, 20),
-    new THREE.MeshStandardMaterial({ color: 0x44aa88 })
-  );
-  cube.position.set(60, 10, -100);
-  cube.userData.name = "Product Cube";
-  clickableObjects.push(cube);
-  scene.add(cube);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
   window.addEventListener("resize", onWindowResize);
-  window.addEventListener("click", onClick);
-}
-
-function onClick(event) {
-  raycaster.setFromCamera({ x: 0, y: 0 }, camera);
-  const intersects = raycaster.intersectObjects(clickableObjects, true);
-
-  if (intersects.length > 0) {
-    let clicked = intersects[0].object;
-
-    // 🔁 Traverse up until we find a parent with userData.name
-    while (clicked && !clicked.userData.name && clicked.parent) {
-      clicked = clicked.parent;
-    }
-
-    if (clicked && clicked.userData.name) {
-      alert("You clicked on: " + clicked.userData.name);
-    }
-  }
 }
 
 function onKeyDown(event) {
