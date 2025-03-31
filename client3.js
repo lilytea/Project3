@@ -141,6 +141,7 @@ function init() {
         break;
     }
   };
+  //
 
   document.addEventListener("keydown", onKeyDown);
   document.addEventListener("keyup", onKeyUp);
