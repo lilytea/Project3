@@ -226,7 +226,7 @@ floor.position.y = -50;
     wallGeometry_right,
     wall_material_right
   );
-  wall_plane_right.position.set(100, 100, 0);
+  wall_plane_right.position.set(100, 50, 0);
  wall_plane_right.rotation.y = -Math.PI / 2; // rotate around Y axis
 /* wall_plane_right.rotation.x = -Math.PI / 4; // rotate around X axis*/
 
@@ -240,7 +240,7 @@ floor.position.y = -50;
     side: THREE.DoubleSide
   });
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
-  wall_plane_left.position.set( -100, 100);
+  wall_plane_left.position.set( -100, 50);
  wall_plane_left.rotation.y = Math.PI / 2; // rotate around Y axis
 /*wall_plane_left.rotation.x = Math.PI / 4; // rotate around X axis*/
 
