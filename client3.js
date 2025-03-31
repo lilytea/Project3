@@ -56,7 +56,7 @@ function init() {
   camera.position.x = 0;
 
 controls = new PointerLockControls(camera, document.body);
-controls.getObject().lookAt(new THREE.Vector3(0, 25, 0)); // LOOK DOWN
+//controls.getObject().lookAt(new THREE.Vector3(0, 25, 0)); // LOOK DOWN
 
 
   // Define basic scene parameters
@@ -197,7 +197,7 @@ const floorGeometry = new THREE.PlaneGeometry(200, 200);
 const floorMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, side: THREE.DoubleSide });
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = -Math.PI / 2;
-floor.position.y = 0;
+floor.position.y = -50;
 
 
   // Insert completed floor into the scene
