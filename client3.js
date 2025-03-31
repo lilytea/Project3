@@ -154,7 +154,7 @@ function init() {
   );
 
   // Generate the ground
-  let floorGeometry = new THREE.PlaneGeometry(1000, 2000, 100, 100);
+  let floorGeometry = new THREE.PlaneGeometry(1000, 2000,100,100);
   floorGeometry.rotateX(-Math.PI / 2);
 
   //Vertex displacement pattern for ground
@@ -229,7 +229,7 @@ function init() {
 
   scene.add(wall_plane_back);
 
-  let wallGeometry_right = new THREE.PlaneGeometry(1600, 1500);
+  let wallGeometry_right = new THREE.PlaneGeometry(2000, 500);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
   const wall_material_right = new THREE.MeshBasicMaterial({
     color: color,
@@ -239,19 +239,19 @@ function init() {
     wallGeometry_right,
     wall_material_right
   );
-  wall_plane_right.position.set(100, 0, 0);
-  wall_plane_right.rotation.y = -90;
+  wall_plane_right.position.set(1000, 250, 0);
+  wall_plane_right.rotation= -Math.PI / 2;
   scene.add(wall_plane_right);
 
-  let wallGeometry_left = new THREE.PlaneGeometry(1600, 1500);
+  let wallGeometry_left = new THREE.PlaneGeometry(2000, 500);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
   const wall_material_left = new THREE.MeshBasicMaterial({
     color: color,
     side: THREE.DoubleSide
   });
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
-  wall_plane_left.position.set(-10, 0, 0);
-  wall_plane_left.rotation.y = -90;
+  wall_plane_left.position.set(, 0, 0);
+  wall_plane_left.rotation=Math.PI / 2;
   scene.add(wall_plane_left);
 
   let wallGeometry_top = new THREE.PlaneGeometry(1600, 1500);
@@ -261,8 +261,8 @@ function init() {
     side: THREE.DoubleSide
   });
   const wall_plane_top = new THREE.Mesh(wallGeometry_top, wall_material_top);
-  wall_plane_top.position.set(0, 1500, 0);
-  wall_plane_top.rotation.x = -90;
+  wall_plane_top.position.set(0, 250, 0);
+  wall_plane_top.rotation.x = Math.PI / 2;
   scene.add(wall_plane_top);
 
   // Generate objects (cubes)
