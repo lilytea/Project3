@@ -44,16 +44,24 @@ animate();
 //addGridHelper();
 // Initialize the scene
 
-const urlParams = new URLSearchParams(window.location.search);
-const prompt = urlParams.get("prompt");
+// Get prompt from URL
+const prompt = new URLSearchParams(window.location.search).get("prompt");
 
 if (prompt) {
   console.log("Prompt from URL:", prompt);
-  callDeepSeekAPI(prompt);
+  callDeepSeekViaNetlify(prompt)
+    .then(reply => {
+      console.log("✅ DeepSeek reply:", reply);
+      // Do something with the reply (e.g., send to 2D-to-3D next)
+    })
+    .catch(error => {
+      console.error("❌ DeepSeek call failed:", error);
+    });
 } else {
   console.log("No prompt found.");
 }
-// deep seek
+
+// Call Netlify serverless function to securely hit DeepSeek API
 async function callDeepSeekViaNetlify(prompt) {
   const response = await fetch("/.netlify/functions/deepseek", {
     method: "POST",
@@ -62,40 +70,12 @@ async function callDeepSeekViaNetlify(prompt) {
   });
 
   const data = await response.json();
-  console.log("DeepSeek (via Netlify):", data);
+  console.log("🧠 DeepSeek (via Netlify) raw response:", data);
 
   const reply = data.choices?.[0]?.message?.content;
   return reply;
 }
-const prompt = new URLSearchParams(window.location.search).get("prompt");
 
-if (prompt) {
-  console.log("Prompt from URL:", prompt);
-  callDeepSeekViaNetlify(prompt).then(reply => {
-    console.log("Response:", reply);
-    // use it in your next step
-  });
-  .catch(error => {
-      console.error("DeepSeek call failed:", error);
-    });
-}
-
-
-    const data = await response.json();
-    console.log("✅ DeepSeek response:", data);
-
-    // Example: access the response content
-    const reply = data.choices?.[0]?.message?.content;
-    if (reply) {
-      console.log("🧠 DeepSeek generated:", reply);
-      // You can now send this to your 2D-to-3D model AI if needed
-    } else {
-      console.error("No content returned from DeepSeek.");
-    }
-  } catch (error) {
-    console.error("❌ DeepSeek API error:", error);
-  }
-}
 
 function init() {
   // Establish the camera
