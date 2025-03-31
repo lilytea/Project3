@@ -43,6 +43,18 @@ init();
 animate();
 //addGridHelper();
 // Initialize the scene
+
+const urlParams = new URLSearchParams(window.location.search);
+const prompt = urlParams.get("prompt");
+
+if (prompt) {
+  console.log("Prompt from URL:", prompt);
+  generateAndLoad3DModel(prompt); // run your DeepSeek + 3D logic
+} else {
+  console.log("No prompt found.");
+}
+
+
 function init() {
   // Establish the camera
   camera = new THREE.PerspectiveCamera(
