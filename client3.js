@@ -183,35 +183,12 @@ function init() {
   // Insert completed floor into the scene
   scene.add(floor);
 ***********/
+const floorGeometry = new THREE.PlaneGeometry(2000, 2000);
+const floorMaterial = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, side: THREE.DoubleSide });
+const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = 0;
 
-  floorGeometry = floorGeometry.toNonIndexed(); // ensure each face has unique vertices
-
-  position = floorGeometry.attributes.position;
-  const colorsFloor = [];
-
-  for (let i = 0, l = position.count; i < l; i = i + 1) {
-    if (i % 64 == 0) {
-      color.setHSL(
-        Math.random() * 0.3 + 0.5,
-        0.75,
-        Math.random() * 0.25 + 0.75
-      );
-      colorsFloor.push(color.r, color.g, color.b);
-    } else {
-      colorsFloor.push(color.r, color.g, color.b);
-    }
-  }
-
-  floorGeometry.setAttribute(
-    "color",
-    new THREE.Float32BufferAttribute(colorsFloor, 3)
-  );
-
-  const floorMaterial = new THREE.MeshBasicMaterial({ vertexColors: true });
-  //color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-  //const floorMaterial= new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide} );
-
-  const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 
   // Insert completed floor into the scene
   scene.add(floor);
@@ -241,7 +218,7 @@ function init() {
   );
   wall_plane_right.position.set(1000, 250, 0);
  wall_plane_right.rotation.y = -Math.PI / 2; // rotate around Y axis
-// wall_plane_right.rotation.x = -Math.PI / 4; // rotate around X axis
+/* wall_plane_right.rotation.x = -Math.PI / 4; // rotate around X axis*/
 
   
   scene.add(wall_plane_right);
@@ -255,7 +232,7 @@ function init() {
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
   wall_plane_left.position.set( 0, 0);
  wall_plane_left.rotation.y = Math.PI / 2; // rotate around Y axis
-//wall_plane_left.rotation.x = Math.PI / 4; // rotate around X axis
+/*wall_plane_left.rotation.x = Math.PI / 4; // rotate around X axis*/
 
   scene.add(wall_plane_left);
 
@@ -266,9 +243,9 @@ function init() {
     side: THREE.DoubleSide
   });
   const wall_plane_top = new THREE.Mesh(wallGeometry_top, wall_material_top);
-  wall_plane_top.position.set(0, 250, 0);
-  wall_plane_top.rotation.y = Math.PI / 2;
-//   wall_plane_top.rotation.x = Math.PI / 4;
+  wall_plane_top.position.set(0, 500, 0);
+  wall_plane_top.rotation.x = Math.PI / 2;
+/*   wall_plane_top.rotation.x = Math.PI / 4;*/
   scene.add(wall_plane_top);
 
   // Generate objects (cubes)
