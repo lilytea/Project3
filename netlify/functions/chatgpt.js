@@ -16,25 +16,25 @@ export async function handler(event, context) {
       };
     }
 
-    const response = await fetch("https://api.deepseek.com/chat/completions", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.DEEPSEEK_API_KEY}`
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
+        model: "gpt-3.5-turbo", // or "gpt-4" if you have access
         messages: [
           {
             role: "system",
-            content: "You are an assistant that generates creative visual prompts for 3D scenes."
+            content: "You are an assistant that generates creative descriptions for futuristic 3D models."
           },
           {
             role: "user",
             content: prompt
           }
         ],
-        stream: false
+        temperature: 0.7
       })
     });
 
