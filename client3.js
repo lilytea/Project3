@@ -10,7 +10,7 @@ import { PointerLockControls } from "./src/PointerLockControls.js";
 import { GLTFLoader } from "./src/GLTFLoader.js";
 // Establish variables
 let camera, scene, renderer, controls;
-
+//
 const objects = [];
 let raycaster;
 //
