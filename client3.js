@@ -240,7 +240,10 @@ function init() {
     wall_material_right
   );
   wall_plane_right.position.set(1000, 250, 0);
-  wall_plane_right.rotation= -Math.PI / 2;
+ wall_plane_right.rotation.y = -Math.PI / 2; // rotate around Y axis
+ wall_plane_right.rotation.x = -Math.PI / 4; // rotate around X axis
+
+  
   scene.add(wall_plane_right);
 
   let wallGeometry_left = new THREE.PlaneGeometry(2000, 500);
@@ -251,7 +254,9 @@ function init() {
   });
   const wall_plane_left = new THREE.Mesh(wallGeometry_left, wall_material_left);
   wall_plane_left.position.set( 0, 0);
-  wall_plane_left.rotation=Math.PI / 2;
+ wall_plane_left.rotation.y = Math.PI / 2; // rotate around Y axis
+wall_plane_left.rotation.x = Math.PI / 4; // rotate around X axis
+
   scene.add(wall_plane_left);
 
   let wallGeometry_top = new THREE.PlaneGeometry(1600, 1500);
@@ -262,7 +267,8 @@ function init() {
   });
   const wall_plane_top = new THREE.Mesh(wallGeometry_top, wall_material_top);
   wall_plane_top.position.set(0, 250, 0);
-  wall_plane_top.rotation.x = Math.PI / 2;
+  wall_plane_top.rotation.y = Math.PI / 2;
+   wall_plane_top.rotation.x = Math.PI / 4;
   scene.add(wall_plane_top);
 
   // Generate objects (cubes)
