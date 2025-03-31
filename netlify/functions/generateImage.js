@@ -5,7 +5,7 @@ export async function handler(event, context) {
         statusCode: 400,
         body: JSON.stringify({ error: "Missing request body." })
       };
-    }
+    }//
 
     const { prompt } = JSON.parse(event.body);
 
