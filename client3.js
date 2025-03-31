@@ -13,7 +13,7 @@ let camera, scene, renderer, controls;
 
 const objects = [];
 let raycaster;
-
+//
 let moveForward = false;
 let moveBackward = false;
 let moveLeft = false;
