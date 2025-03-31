@@ -49,13 +49,13 @@ const prompt = new URLSearchParams(window.location.search).get("prompt");
 
 if (prompt) {
   console.log("Prompt from URL:", prompt);
-  callDeepSeekViaNetlify(prompt)
+  callChatGPT(prompt)
     .then(reply => {
-      console.log("✅ DeepSeek reply:", reply);
+      console.log("✅ chatgpt reply:", reply);
       // Do something with the reply (e.g., send to 2D-to-3D next)
     })
     .catch(error => {
-      console.error("❌ DeepSeek call failed:", error);
+      console.error("❌ chatgpt call failed:", error);
     });
 } else {
   console.log("No prompt found.");
