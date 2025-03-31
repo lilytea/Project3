@@ -301,7 +301,7 @@ floor.position.y = 0;
       mesh.position.x = 25;
       mesh.position.y = 25;
       mesh.position.z = -25;
-      mesh.scale.set(80, 80, 80);
+      mesh.scale.set(8, 8, 8);
       mesh.rotation.y = -45;
       // Add model to scene
       scene.add(mesh);
