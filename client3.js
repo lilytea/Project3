@@ -342,7 +342,7 @@ floor.position.y = -50;
   // Insert completed boxes into the scene
 
   const loader = new GLTFLoader().load(
-    "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fshoe_with_human.glb?v=1636907298860",
+    "/assets/soft.obj",
     function(gltf) {
       // Scan loaded model for mesh and apply defined material if mesh is present
       gltf.scene.traverse(function(child) {
