@@ -1,39 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Museum Showroom</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    body {
+      background: url("https://images.unsplash.com/photo-1603993097397-89d4c6b5d2aa?auto=format&fit=crop&w=1950&q=80") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    .window {
+      position: absolute;
+      width: 300px;
+      height: 200px;
+      border: 4px solid white;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+
+    .window:hover {
+      transform: scale(1.05);
+    }
+
+    .left {
+      top: 30%;
+      left: 10%;
+    }
+
+    .right {
+      top: 30%;
+      right: 10%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
 <body>
-  <h1>Gallery</h1>
 
-  <div id="gallery">
-    <!-- Room 1 -->
-    <div class="room-frame">
-      <iframe
-        src="showroom.html?room=room001&autoplay=false"
-        id="preview-room001"
-        width="400"
-        height="300"
-        style="border: none; border-radius: 8px;"
-        allow="fullscreen; pointer-lock"
-      ></iframe>
-    </div>
+  <!-- Left window -->
+  <div class="window left" onclick="enterRoom('room001')">
+    <iframe src="showroom.html?room=room001&autoplay=false"></iframe>
+  </div>
 
-    <!-- Room 2 (optional, more previews) -->
-    <div class="room-frame">
-      <iframe
-        src="showroom.html?room=room002&autoplay=false"
-        id="preview-room002"
-        width="400"
-        height="300"
-        style="border: none; border-radius: 8px;"
-        allow="fullscreen; pointer-lock"
-      ></iframe>
-    </div>
+  <!-- Right window -->
+  <div class="window right" onclick="enterRoom('room002')">
+    <iframe src="showroom.html?room=room002&autoplay=false"></iframe>
   </div>
 
   <script>
-    document.getElementById('preview-room001').addEventListener('click', () => {
-      const iframe = document.getElementById('preview-room001');
-      if (iframe.requestFullscreen) iframe.requestFullscreen();
-      iframe.contentWindow.postMessage({ start: true }, '*');
-    });
-
-    // Repeat for other rooms if needed
+    function enterRoom(roomId) {
+      window.location.href = `showroom.html?room=${roomId}`;
+    }
   </script>
+
 </body>
+</html>
