@@ -22,10 +22,10 @@
 }
 
 .div-block-2 {
-  background-image: url('../images/roof.png');
+  background-image: url('../images/roof2.png');
   background-position: 0 0;
   background-size: auto;
-  height: 400px;
+  height: 180px;
 }
 
 .div-block-3 {
@@ -60,6 +60,8 @@
   top: 31%;
   left: 73%;
 }
+
+
 
 iframe {
   width: 100%;
