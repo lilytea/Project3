@@ -62,12 +62,12 @@ const prompt = new URLSearchParams(window.location.search).get("prompt");
 
 window.addEventListener("message", (event) => {
   if (event.data.start) {
-    controls.lock(); // starts pointer lock
-    // optionally hide UI or overlays
+    controls.lock(); // start pointer lock
     const blocker = document.getElementById("blocker");
     if (blocker) blocker.style.display = "none";
   }
 });
+
 
 
 

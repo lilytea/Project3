@@ -55,19 +55,48 @@
 <body>
 
   <!-- Left window -->
-  <div class="window left" onclick="enterRoom('room001')">
-    <iframe src="showroom.html?room=room001&autoplay=false"></iframe>
+  <div class="window left">
+    <iframe 
+      src="showroom.html?room=room001&autoplay=false"
+      id="preview-room001"
+      allow="fullscreen; pointer-lock"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <!-- Right window -->
-  <div class="window right" onclick="enterRoom('room002')">
-    <iframe src="showroom.html?room=room002&autoplay=false"></iframe>
+  <div class="window right">
+    <iframe 
+      src="showroom.html?room=room002&autoplay=false"
+      id="preview-room002"
+      allow="fullscreen; pointer-lock"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <script>
-    function enterRoom(roomId) {
-      window.location.href = `showroom.html?room=${roomId}`;
+    function activateFullscreen(iframeId) {
+      const iframe = document.getElementById(iframeId);
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+
+      // Send message to iframe
+      iframe.contentWindow.postMessage({ start: true }, "*");
     }
+
+    // Attach click handlers to both windows
+    document.querySelector(".left").addEventListener("click", () => {
+      activateFullscreen("preview-room001");
+    });
+
+    document.querySelector(".right").addEventListener("click", () => {
+      activateFullscreen("preview-room002");
+    });
   </script>
 
 </body>
