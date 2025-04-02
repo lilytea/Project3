@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Museum Showroom</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    body {
+      background: url("https://images.unsplash.com/photo-1603993097397-89d4c6b5d2aa?auto=format&fit=crop&w=1950&q=80") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    .window {
+      position: absolute;
+      width: 300px;
+      height: 200px;
+      border: 4px solid white;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+
+    .window:hover {
+      transform: scale(1.05);
+    }
+
+    .left {
+      top: 30%;
+      left: 10%;
+    }
+
+    .right {
+      top: 30%;
+      right: 10%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left window -->
+  <div class="window left">
+    <iframe 
+      src="showroom.html?room=room001&autoplay=false"
+      id="preview-room001"
+      allow="fullscreen; pointer-lock"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <!-- Right window -->
+  <div class="window right">
+    <iframe 
+      src="showroom.html?room=room002&autoplay=false"
+      id="preview-room002"
+      allow="fullscreen; pointer-lock"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    function activateFullscreen(iframeId) {
+      const iframe = document.getElementById(iframeId);
+      if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+      } else if (iframe.webkitRequestFullscreen) {
+        iframe.webkitRequestFullscreen();
+      } else if (iframe.msRequestFullscreen) {
+        iframe.msRequestFullscreen();
+      }
+
+      // Send message to iframe
+      iframe.contentWindow.postMessage({ start: true }, "*");
+    }
+
+    // Attach click handlers to both windows
+    document.querySelector(".left").addEventListener("click", () => {
+      activateFullscreen("preview-room001");
+    });
+
+    document.querySelector(".middle").addEventListener("click", () => {
+      activateFullscreen("preview-room002");
+
+    document.querySelector(".right").addEventListener("click", () => {
+      activateFullscreen("preview-room003");
+
+    });
+  </script>
+
+</body>
+</html>

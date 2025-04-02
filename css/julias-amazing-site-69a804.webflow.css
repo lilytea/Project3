@@ -1,0 +1,62 @@
+.w-layout-blockcontainer {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+@media screen and (max-width: 991px) {
+  .w-layout-blockcontainer {
+    max-width: 728px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .w-layout-blockcontainer {
+    max-width: none;
+  }
+}
+
+.div-block {
+  position: relative;
+}
+
+.div-block-2 {
+  background-image: url('../images/roof.png');
+  background-position: 0 0;
+  background-size: auto;
+  height: 400px;
+}
+
+.div-block-3 {
+  background-image: url('../images/wall.png');
+  background-position: 0 0;
+  background-repeat: repeat-y;
+  background-size: auto;
+  height: 260px;
+  position: relative;
+}
+
+.window1 {
+  width: 13%;
+  height: 170px;
+  position: absolute;
+  top: 31%;
+  left: 23%;
+}
+
+.window2 {
+  width: 12%;
+  height: 170px;
+  position: absolute;
+  top: 31%;
+  left: 49%;
+}
+
+.window3 {
+  width: 12%;
+  height: 170px;
+  position: absolute;
+  top: 31%;
+  left: 73%;
+}
