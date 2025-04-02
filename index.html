@@ -1,38 +1,44 @@
-<!-- -->
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Art 109 Three.js GLTF Model</title>
-    <link rel="stylesheet" href="./style2.css" />
+<head>
+  <title>Virtual Showrooms</title>
+  <style>
+    body { font-family: sans-serif; }
+    .room-card {
+      display: inline-block;
+      margin: 20px;
+      text-align: center;
+    }
+    .room-card img {
+      width: 200px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Showroom Gallery</h1>
+  <div id="gallery"></div>
 
-    <!--Loading pointer lock example script, as a module script, it will call all the other required sources from the script.-->
-   <script src="./client3.js" type="module"></script>
-  </head>
-  <body>
-    <!--These divs contain the overlay text and are made invisible by functions within the client3.js script.-->
-    <div id="blocker">
-      <div id="instructions">
-        <br />
-        <h1>Wonderland</h1>
-        <p class="words">
-          Can YOU find the THREE rabbits after they disappeared?
-        </p>
-        <p class="h2">
-          Click To Play
-        </p>
-        <p class="move-mid">
-          Move: WASD<br />
-          Jump: SPACE<br />
-          Look: MOUSE
-        </p>
-       
-        <p class="link">
-          
-          <a href="./">main</a>
-        </p>
-      </div>
-    </div>
-  </body>
+  <script>
+    fetch('rooms.json')
+      .then(res => res.json())
+      .then(rooms => {
+        const container = document.getElementById('gallery');
+        rooms.forEach(room => {
+          const div = document.createElement('div');
+          div.className = 'room-card';
+          div.innerHTML = `
+            <a href="showroom.html?room=${room.id}" target="_blank">
+              <img src="${room.preview}" alt="${room.owner}" />
+              <p>${room.owner}</p>
+            </a>
+          `;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
 </html>
