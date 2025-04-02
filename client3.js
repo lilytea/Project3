@@ -60,6 +60,17 @@ animate();
 // Get prompt from URL
 const prompt = new URLSearchParams(window.location.search).get("prompt");
 
+window.addEventListener("message", (event) => {
+  if (event.data.start) {
+    controls.lock(); // starts pointer lock
+    // optionally hide UI or overlays
+    const blocker = document.getElementById("blocker");
+    if (blocker) blocker.style.display = "none";
+  }
+});
+
+
+
 if (prompt) {
   console.log("Prompt from URL:", prompt);
 
