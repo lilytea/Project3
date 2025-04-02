@@ -354,6 +354,27 @@ floor.position.y = -50;
     */
   // Insert completed boxes into the scene
 
+  const roomId = new URLSearchParams(window.location.search).get("room");
+
+  fetch('rooms.json')
+    .then(res => res.json())
+    .then(rooms => {
+      const room = rooms.find(r => r.id === roomId);
+      if (!room) return console.error("Room not found");
+  
+      const loader = new THREE.GLTFLoader();
+      loader.load(room.model, gltf => {
+        const model = gltf.scene;
+        model.scale.set(10, 10, 10);
+        scene.add(model);
+      });
+  
+      const label = document.createElement('div');
+      label.innerText = `Store: ${room.owner}`;
+      label.style = "position: absolute; top: 10px; left: 10px; color: white;";
+      document.body.appendChild(label);
+    });
+    /*
   const loader = new GLTFLoader().load(
     "/assets/sofa1.glb",
     function(gltf) {
@@ -400,6 +421,7 @@ floor.position.y = -50;
       console.error(error);
     }
   );
+  */
   const loader2 = new GLTFLoader().load(
     "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496",
     function(gltf) {
