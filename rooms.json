@@ -1,0 +1,14 @@
+[
+  {
+    "id": "room001",
+    "owner": "Alice's Art",
+    "preview": "assets/room1.jpg",
+    "model": "assets/red-sofa.glb"
+  },
+  {
+    "id": "room002",
+    "owner": "Bob's Design",
+    "preview": "assets/room2.jpg",
+    "model": "assets/modern-chair.glb"
+  }
+]

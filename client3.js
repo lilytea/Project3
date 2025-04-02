@@ -9,6 +9,7 @@ import * as THREE from "./build/three.module.js";
 // Import pointer lock controls
 import { PointerLockControls } from "./src/PointerLockControls.js";
 import { GLTFLoader } from "./src/GLTFLoader.js";
+
 // Establish variables
 let camera, scene, renderer, controls;
 //
@@ -28,6 +29,18 @@ const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 const vertex = new THREE.Vector3();
 const color = new THREE.Color();
+//const colormap=new THREE.TextureLoader().load('/assets/texture/Fabric036_2K-JPG_Color_3.jpeg');
+//const normalmap=new THREE.TextureLoader().load('/assets/texture/Fabric036_2K-JPG_NormalDX_2.jpeg');
+//const roughmap=new THREE.TextureLoader().load('/assets/texture/Fabric036_2K-JPG_Roughness_4@channels=G.png');
+//const colormap=new THREE.TextureLoader().load('/assets/texture/Leather025_2K-JPG_Color_6.jpeg');
+const normalmap=new THREE.TextureLoader().load('/assets/texture/Leather025_2K-JPG_NormalDX_5.jpeg');
+const roughmap=new THREE.TextureLoader().load('/assets/texture/Leather025_2K-JPG_Roughness_7@channels=G.png');
+const colormap=new THREE.TextureLoader().load('/assets/texture/Metal029_1K-JPG_Color_0.jpeg');
+const texture7=new THREE.TextureLoader().load('/assets/texture/Metal029_1K-JPG_Roughness_1@channels=G.png');
+
+
+
+
 
 let num = 10;
 let count1 = num;
@@ -251,18 +264,18 @@ floor.position.y = -50;
   // Insert completed floor into the scene
   scene.add(floor);
 
-  //***************************
+ 
 
-  let wallGeometry_back = new THREE.PlaneGeometry(800, 1500);
+  let wallGeometry_back = new THREE.PlaneGeometry(200, 200);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
   const wall_material_back = new THREE.MeshBasicMaterial({
     color: color,
     side: THREE.DoubleSide
   });
   const wall_plane_back = new THREE.Mesh(wallGeometry_back, wall_material_back);
-  wall_plane_back.position.set(75, 35, -2000);
+  wall_plane_back.position.set(100, 50, 200);
 
-//  scene.add(wall_plane_back);
+   scene.add(wall_plane_back);
 
   let wallGeometry_right = new THREE.PlaneGeometry(200, 200);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
@@ -342,7 +355,7 @@ floor.position.y = -50;
   // Insert completed boxes into the scene
 
   const loader = new GLTFLoader().load(
-    "/assets/soft.obj",
+    "/assets/sofa1.glb",
     function(gltf) {
       // Scan loaded model for mesh and apply defined material if mesh is present
       gltf.scene.traverse(function(child) {
@@ -352,11 +365,33 @@ floor.position.y = -50;
       });
       // set position and scale
       mesh = gltf.scene;
-      mesh.position.x = 25;
-      mesh.position.y = 25;
-      mesh.position.z = -25;
-      mesh.scale.set(8, 8, 8);
-      mesh.rotation.y = -45;
+      mesh.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshStandardMaterial({
+            map: colormap,
+            normalMap: normalmap,
+            roughnessMap: roughmap
+          });
+    
+          // Optional: support aoMap/uv2 fallback (even if not used here)
+          child.geometry.attributes.uv2 = child.geometry.attributes.uv;
+        }
+      });
+    
+
+      const ambient = new THREE.AmbientLight(0xffe6cc, 0.6); // warm soft glow
+      scene.add(ambient);
+      
+      const directional = new THREE.DirectionalLight(0xffcc99, 1); // warm sunlight
+      directional.position.set(5, 10, 5);
+      scene.add(directional);
+      
+
+      mesh.position.x = 0;
+      mesh.position.y = -30;
+      mesh.position.z = -20;
+      mesh.scale.set(25, 25, 25);
+      mesh.rotation.y = 350;
       // Add model to scene
       scene.add(mesh);
     },
@@ -376,10 +411,10 @@ floor.position.y = -50;
       });
       // set position and scale
       mesh2 = gltf.scene;
-      mesh2.position.x = -350;
-      mesh2.position.y = 210;
-      mesh2.position.z = -440;
-      mesh2.scale.set(100, 100, 100);
+      mesh2.position.x = 0;
+      mesh2.position.y = 0;
+      mesh2.position.z = -20;
+      mesh2.scale.set(200, 200, 200);
       mesh2.rotation.y = 250;
       // Add model to scene
 //      scene.add(mesh2);
