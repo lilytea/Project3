@@ -73,7 +73,8 @@
 
       row1.forEach((el, i) => {
         const comp = window.getComputedStyle(el);
-        const top = parseFloat(comp.top);
+        const top = el.offsetTop; // get top in px
+
         const left = comp.left;
         const width = comp.width;
         const height = comp.height;
@@ -83,7 +84,8 @@
         const newWindow = document.createElement("div");
         newWindow.className = `window${roomNum}`;
         newWindow.style.position = "absolute";
-        newWindow.style.top = `${top + rowOffset}%`;
+        const rowOffset = 200; // px between rows
+
         newWindow.style.left = left;
         newWindow.style.width = width;
         newWindow.style.height = height;
