@@ -58,6 +58,9 @@ animate();
 // Initialize the scene
 
 // Get prompt from URL
+//renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+//renderer.setClearColor(0x000000, 0); // fully transparent
+
 const prompt = new URLSearchParams(window.location.search).get("prompt");
 
 window.addEventListener("message", (event) => {
@@ -133,7 +136,10 @@ controls = new PointerLockControls(camera, document.body);
 
   // Define basic scene parameters
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xffffff);
+ // scene = new THREE.Scene();
+ scene.background = null;
+
+  //scene.background = new THREE.Color(0xffffff);
 //  scene.fog = new THREE.Fog(0xffffff, 0, 750);
 
 
@@ -286,7 +292,7 @@ floor.position.y = -50;
   const wall_plane_back = new THREE.Mesh(wallGeometry_back, wall_material_back);
   wall_plane_back.position.set(100, 50, 200);
 
-   scene.add(wall_plane_back);
+   //scene.add(wall_plane_back);
 
   let wallGeometry_right = new THREE.PlaneGeometry(200, 200);
   color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
@@ -730,7 +736,9 @@ console.log("Requested roomId:", roomId);
   */
 
   // Define Rendered and html document placement
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  //renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
   renderer.toneMapping = THREE.reinhardToneMapping;
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
