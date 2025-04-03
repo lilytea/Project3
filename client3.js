@@ -366,26 +366,72 @@ floor.position.y = -50;
   // Insert completed boxes into the scene
 
   const roomId = new URLSearchParams(window.location.search).get("room");
+ // const roomId = new URLSearchParams(window.location.search).get("room");
+console.log("Requested roomId:", roomId);
 
   fetch('rooms.json')
     .then(res => res.json())
     .then(rooms => {
       const room = rooms.find(r => r.id === roomId);
       if (!room) return console.error("Room not found");
+      console.log("Requested roomId:", roomId);
+    console.log("model", room.model);
+     
+    const loader = new GLTFLoader().load(
+      room.model,
+      function(gltf) {
+        // Scan loaded model for mesh and apply defined material if mesh is present
+        gltf.scene.traverse(function(child) {
+          //if (child.isMesh) {
+          // child.material = newMaterial;
+          //}
+        });
+        // set position and scale
+        mesh = gltf.scene;
+        mesh.traverse((child) => {
+          if (child.isMesh) {
+            child.material = new THREE.MeshStandardMaterial({
+              map: colormap,
+              normalMap: normalmap,
+              roughnessMap: roughmap
+            });
+      
+            // Optional: support aoMap/uv2 fallback (even if not used here)
+            child.geometry.attributes.uv2 = child.geometry.attributes.uv;
+          }
+        });
+      
   
-      const loader = new THREE.GLTFLoader();
-      loader.load(room.model, gltf => {
-        const model = gltf.scene;
-        model.scale.set(10, 10, 10);
-        scene.add(model);
-      });
+        const ambient = new THREE.AmbientLight(0xffe6cc, 0.6); // warm soft glow
+        scene.add(ambient);
+        
+        const directional = new THREE.DirectionalLight(0xffcc99, 1); // warm sunlight
+        directional.position.set(5, 10, 5);
+        scene.add(directional);
+        
   
+        mesh.position.x = 0;
+        mesh.position.y = -30;
+        mesh.position.z = -20;
+        mesh.scale.set(25, 25, 25);
+        mesh.rotation.y = 350;
+        // Add model to scene
+        scene.add(mesh);
+      },
+      undefined,
+      function(error) {
+        console.error(error);
+      }
+    );
+
+  
+
       const label = document.createElement('div');
       label.innerText = `Store: ${room.owner}`;
       label.style = "position: absolute; top: 10px; left: 10px; color: white;";
       document.body.appendChild(label);
     });
-    /*
+    
   const loader = new GLTFLoader().load(
     "/assets/sofa1.glb",
     function(gltf) {
@@ -425,14 +471,14 @@ floor.position.y = -50;
       mesh.scale.set(25, 25, 25);
       mesh.rotation.y = 350;
       // Add model to scene
-      scene.add(mesh);
+    //  scene.add(mesh);
     },
     undefined,
     function(error) {
       console.error(error);
     }
   );
-  */
+  
   const loader2 = new GLTFLoader().load(
     "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496",
     function(gltf) {

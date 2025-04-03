@@ -3,52 +3,52 @@
     "id": "room001",
     "owner": "Alice's Art",
     "preview": "assets/room1.jpg",
-    "model": "/assets/sofa1.glb"
+    "model": "./assets/soft1.glb"
   },
   {"id": "room002",
     "owner": "Alice's Art",
     "preview": "assets/room2.jpg",
-    "model": "/assets/sofa1.glb"
+    "model": "./assets/soft1.glb"
   },
   {
     "id": "room003",
     "owner": "Bob's Design",
     "preview": "assets/room3.jpg",
-    "model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
+    "model": "./assets/soft1.glb"
   },
   {"id": "room004",
     "owner": "Alice's Art",
     "preview": "assets/room2.jpg",
-    "model": "/assets/sofa1.glb"
+    "model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Frabbit.glb?v=1637037714646"
   },
   {"id": "room005",
     "owner": "Alice's Art",
     "preview": "assets/room2.jpg",
-    "model": "/assets/sofa1.glb"
+    "model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
   },
   {"id": "room006",
     "owner": "Alice's Art",
     "preview": "assets/room2.jpg",
-    "model": "/assets/sofa1.glb"
+    "model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
   },
   {"id": "room007",
   "owner": "Alice's Art",
   "preview": "assets/room2.jpg",
-  "model": "/assets/sofa1.glb"
+  "model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
 },
 {"id": "room008",
 "owner": "Alice's Art",
 "preview": "assets/room2.jpg",
-"model": "/assets/sofa1.glb"
+"model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
 },
 {"id": "room009",
 "owner": "Alice's Art",
 "preview": "assets/room2.jpg",
-"model": "/assets/sofa1.glb"
+"model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
 },
 {"id": "room010",
 "owner": "Alice's Art",
 "preview": "assets/room2.jpg",
-"model": "/assets/sofa1.glb"
+"model": "https://cdn.glitch.me/62a23053-ce70-4d1c-b386-dbfe331a4076%2Fclock_with_man.glb?v=1636908106496"
 }
 ]
