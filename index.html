@@ -119,5 +119,26 @@ newWindow.style.top = `${top + rowOffset}px`;
       }
     });
   </script>
+<!-- ... other HTML above -->
+
+<script>
+  function growWallToFitWindows() {
+    const wall = document.querySelector('.div-block-3');
+    const allWindows = wall.querySelectorAll('[class^="window"]');
+    let maxBottom = 0;
+    allWindows.forEach(win => {
+      const bottom = win.offsetTop + win.offsetHeight;
+      if (bottom > maxBottom) maxBottom = bottom;
+    });
+    wall.style.height = `${maxBottom + 100}px`;
+  }
+
+  // Call the function AFTER all the windows are added
+  growWallToFitWindows();
+</script>
+
+</body>
+</html>
+
 </body>
 </html>
