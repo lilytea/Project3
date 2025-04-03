@@ -3,18 +3,18 @@
     "id": "room001",
     "owner": "Alice's Art",
     "preview": "assets/room1.jpg",
-    "model": "./assets/soft1.glb"
+    "model": "/assets/soft1.glb"
   },
   {"id": "room002",
     "owner": "Alice's Art",
     "preview": "assets/room2.jpg",
-    "model": "./assets/soft1.glb"
+    "model": "/assets/soft1.glb"
   },
   {
     "id": "room003",
     "owner": "Bob's Design",
     "preview": "assets/room3.jpg",
-    "model": "./assets/soft1.glb"
+    "model": "/assets/soft1.glb"
   },
   {"id": "room004",
     "owner": "Alice's Art",
