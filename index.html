@@ -20,6 +20,14 @@
 </head>
 <body>
   <section></section>
+<!-- HERO SECTION -->
+<div style="width: 100%; padding: 80px 20px; background: #f0f0f0; text-align: center;">
+  <h1 style="margin: 0;">Welcome to Showroom8</h1>
+  <p>
+    Want to showcase your own room?
+    <a href="https://tally.so/r/mVND0J" style="color: blue; text-decoration: underline;">Click here to register</a>
+  </p>
+</div>
 
   <div class="w-layout-blockcontainer w-container">
     <div class="div-block">
@@ -48,7 +56,7 @@
     function activateFullscreen(iframeId) {
       const iframe = document.getElementById(iframeId);
       if (!iframe) return;
-
+  
       if (iframe.requestFullscreen) {
         iframe.requestFullscreen();
       } else if (iframe.webkitRequestFullscreen) {
@@ -56,70 +64,81 @@
       } else if (iframe.msRequestFullscreen) {
         iframe.msRequestFullscreen();
       }
-
+  
       iframe.contentWindow.postMessage({ start: true }, "*");
     }
-
-    // ✅ Dynamically add window4, 5, 6 below window1–3
+  
     window.addEventListener("DOMContentLoaded", () => {
       const wall = document.getElementById("wall");
-      const row1 = [
+  
+      // Get positions of first 3 windows
+      const referenceWindows = [
         document.querySelector(".window1"),
         document.querySelector(".window2"),
         document.querySelector(".window3")
       ];
-
-     
-
-      row1.forEach((el, i) => {
-        const comp = window.getComputedStyle(el);
-        const top = el.offsetTop; // get top in px
-
-        const left = comp.left;
-        const width = comp.width;
-        const height = comp.height;
-
-        const roomNum = i + 4; // window4, window5, window6
-
-        const newWindow = document.createElement("div");
-        newWindow.className = `window${roomNum}`;
-        newWindow.style.position = "absolute";
-        const rowOffset = 300; // px between rows
-        newWindow.style.top = `${top + rowOffset}px`;
-        console.log(top);
-	console.log( newWindow.style.top);
-        newWindow.style.left = left;
-        newWindow.style.width = width;
-        newWindow.style.height = height;
-
-        const iframe = document.createElement("iframe");
-        iframe.src = `showroom.html?room=room00${roomNum}`;
-        iframe.id = `preview-room00${roomNum}`;
-        iframe.allowFullscreen = true;
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-
-        newWindow.appendChild(iframe);
-        wall.appendChild(newWindow);
-
-        // ✅ Add click handler
-        newWindow.addEventListener("click", () => {
-          activateFullscreen(iframe.id);
-        });
+  
+      const baseTop = referenceWindows[0].offsetTop;
+      const rowOffset = 300;
+  
+      const lefts = referenceWindows.map(win => {
+        return window.getComputedStyle(win).left;
       });
-
-      // ✅ Also attach fullscreen to window1–3
-      for (let i = 1; i <= 3; i++) {
-        const win = document.querySelector(`.window${i}`);
-        if (win) {
-          win.addEventListener("click", () =>
-            activateFullscreen(`preview-room00${i}`)
-          );
-        }
-      }
+  
+      const width = window.getComputedStyle(referenceWindows[0]).width;
+      const height = window.getComputedStyle(referenceWindows[0]).height;
+  
+      fetch('rooms.json')
+        .then(res => res.json())
+        .then(data => {
+          data.forEach((room, i) => {
+            if (i < 3) return; // Skip first 3 since they're already placed
+  
+            const row = Math.floor(i / 3);
+            const col = i % 3;
+  
+            const newWindow = document.createElement("div");
+            newWindow.className = `window${i + 1}`;
+            newWindow.style.position = "absolute";
+            newWindow.style.top = `${baseTop + row * rowOffset}px`;
+            newWindow.style.left = lefts[col];
+            newWindow.style.width = width;
+            newWindow.style.height = height;
+  
+            const iframe = document.createElement("iframe");
+            iframe.src = `showroom.html?room=${room.id}`;
+            iframe.id = `preview-${room.id}`;
+            iframe.allowFullscreen = true;
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+  
+            newWindow.appendChild(iframe);
+            wall.appendChild(newWindow);
+  
+            newWindow.addEventListener("click", () => {
+              activateFullscreen(iframe.id);
+            });
+          });
+  
+          // Attach fullscreen to the first 3 windows
+          for (let i = 1; i <= 3; i++) {
+            const win = document.querySelector(`.window${i}`);
+            if (win) {
+              win.addEventListener("click", () =>
+                activateFullscreen(`preview-room00${i}`)
+              );
+            }
+          }
+  
+          // Adjust wall height after all are added
+          growWallToFitWindows();
+        })
+        .catch(err => console.error("Error loading rooms.json:", err));
     });
   </script>
+  
+  
 <!-- ... other HTML above -->
 
 <script>
