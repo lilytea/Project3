@@ -84,7 +84,7 @@
         const newWindow = document.createElement("div");
         newWindow.className = `window${roomNum}`;
         newWindow.style.position = "absolute";
-        const rowOffset = 400; // px between rows
+        const rowOffset = 188; // px between rows
 newWindow.style.top = `${top + rowOffset}px`;
 
         newWindow.style.left = left;
@@ -130,7 +130,7 @@ newWindow.style.top = `${top + rowOffset}px`;
       const bottom = win.offsetTop + win.offsetHeight;
       if (bottom > maxBottom) maxBottom = bottom;
     });
-    wall.style.height = `${maxBottom + 400}px`;
+    wall.style.height = `${maxBottom + 410}px`;
   }
 
   // Call the function AFTER all the windows are added
