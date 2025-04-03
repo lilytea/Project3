@@ -30,5 +30,15 @@
     "owner": "Alice's Art",
     "preview": "assets/room2.jpg",
     "model": "/assets/sofa1.glb"
-  }
+  },
+  {"id": "room007",
+  "owner": "Alice's Art",
+  "preview": "assets/room2.jpg",
+  "model": "/assets/sofa1.glb"
+},
+{"id": "room008",
+"owner": "Alice's Art",
+"preview": "assets/room2.jpg",
+"model": "/assets/sofa1.glb"
+}
 ]
